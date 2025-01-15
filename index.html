@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merged Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: blueviolet;
+        }
+        .box2 {
+            background-color: white;
+            height: 20vh;
+            width: 45vh;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            padding: 1rem;
+        }
+        h3 {
+            color: blueviolet;
+            font-size: xx-large;
+        }
+        input {
+            height: 2.5rem;
+            width: 10rem;
+            background-color: silver;
+            border-radius: 10px;
+            border: none;
+            padding-left: 25%;
+            margin-top: 0.5rem;
+        }
+        #done {
+            height: 2.5rem;
+            width: 8rem;
+            border-radius: 25px;
+            background-color: rgb(20, 183, 72);
+            color: white;
+            font-size: medium;
+            font-weight: bold;
+            border: none;
+            margin-left: 50%;
+        }
+        #resetBtn {
+            background-color: silver;
+            color: black;
+            font-weight: 500;
+            border-radius: 25px;
+            width: 6rem;
+            height: 2rem;
+            border: none;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .bulb-container {
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+        .bulb {
+            width: 100px;
+            height: 100px;
+            margin: 25px 10px 10px 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+            padding: 3rem;
+        }
+        .bulb-off {
+            background-image: url('off_bulb.png');
+        }
+        .bulb-on {
+            background-image: url('onbulb.png');
+        }
+        .toggle-wrapper {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            margin-bottom: 10px;
+        }
+        .toggle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #e74c3c;
+            color: #e74c3c;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0% 0% 10% 65%;
+            border: 1px solid black;
+        }
+        .toggle:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2.5px;
+            left: 3px;
+            transform: translateX(110%);
+            transition: all 0.3s;
+        }
+        .toggle-on {
+            background-color: #27ae60;
+        }
+        .toggle-on:before {
+            transform: translateX(0px);
+        }
+        button {
+            height: 3rem;
+            width: 10rem;
+            border-radius: 25px;
+            background-color: silver;
+            border: none;
+            color: black;
+            font-weight: bold;
+            font-size: larger;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <button type="submit" id="InputPage">START</button>
+    </div>
+    <div class="box2 hidden">
+        <h3>Custom Lighting</h3>
+        <input type="text" id="Input" >
+        <div id="buttonDiv">
+            <button type="submit" id="done">Done</button>
+        </div>
+    </div>
+    <div class="bulb-container" id="bulbContainer"></div>
+    <button id="resetBtn" class="hidden">Reset</button>
+    <script>
+        const done = document.getElementById('done');
+        const bulbContainer = document.getElementById('bulbContainer');
+        const resetBtn = document.getElementById('resetBtn');
+        const box2 = document.querySelector('.box2');
+        const inputPageBtn = document.getElementById('InputPage');
+        const bodyDiv = document.querySelector('.body');
+
+        inputPageBtn.addEventListener('click', () => {
+            box2.classList.remove('hidden');
+            inputPageBtn.classList.add('hidden');
+        });
+
+        done.addEventListener('click', () => {
+            const bulbCount = parseInt(document.getElementById("Input").value);
+            if (!bulbCount || bulbCount <= 0) {
+                alert('Please enter a valid number');
+                return;
+            }
+            box2.classList.add('hidden');
+            createBulbs(bulbCount);
+            bulbContainer.classList.remove('hidden');
+            resetBtn.classList.remove('hidden');
+        });
+
+        function createBulbs(count) {
+            bulbContainer.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const bulbWrapper = document.createElement('div');
+                bulbWrapper.classList.add('bulb-wrapper');
+
+                const bulb = document.createElement('div');
+                bulb.classList.add('bulb', 'bulb-off');
+                bulbWrapper.appendChild(bulb);
+
+                const toggleWrapper = document.createElement('div');
+                toggleWrapper.classList.add('toggle-wrapper');
+
+                const toggle = document.createElement('div');
+                toggle.classList.add('toggle');
+                toggleWrapper.appendChild(toggle);
+
+                toggle.addEventListener('click', () => {
+                    toggle.classList.toggle('toggle-on');
+                    if (toggle.classList.contains('toggle-on')) {
+                        bulb.classList.remove('bulb-off');
+                        bulb.classList.add('bulb-on');
+                    } else {
+                        bulb.classList.remove('bulb-on');
+                        bulb.classList.add('bulb-off');
+                    }
+                });
+
+                bulbWrapper.appendChild(toggleWrapper);
+                bulbContainer.appendChild(bulbWrapper);
+            }
+        }
+
+        resetBtn.addEventListener('click', () => {
+            bulbContainer.innerHTML = '';
+            bulbContainer.classList.add('hidden');
+            resetBtn.classList.add('hidden');
+            box2.classList.add('hidden');
+            inputPageBtn.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
