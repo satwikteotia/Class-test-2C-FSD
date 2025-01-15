@@ -1,0 +1,145 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: rgb(255, 231, 17);
+  }
+  
+  .container {
+    margin-top: 50px;
+  }
+  
+  #startButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(244, 39, 190);
+    border-radius: 0px;
+    border-style: solid;
+    border-color: rgb(5, 0, 0);
+    align-items: center;
+  }
+  .cusomlighting{
+    color: rgb(12, 0, 29);
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0px;
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    border-radius: 0px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    
+  }
+  #numberInput{
+    background-color: silver;
+   height:40px;
+   border-style:solid;
+   border-color: silver;
+   border-radius: 0px;;
+  }
+  #doneButton{
+    border-radius: 0px;
+border-style: solid;
+border-color: rgb(47, 255, 206);
+color:white;
+    background-color: rgb(47, 255, 206);
+    height:40px;
+    width:100px;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .bulb {
+    width: 170px;
+    height: 210px;
+    border-radius: 0% 0% 0 0;
+    background-color: #eee;
+    margin: 0 10px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .bulb.on {
+    background-color: #f0f0f0;
+  }
+  
+  .bulb .base {
+    width: 50px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 0%;
+  }
+  
+  .bulb-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 150px;
+    height: 200px;
+    border-radius: 0%;
+  }
+  
+  #resetButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 0px;
+    border-style: solid;
+    border-style: solid;
+    border-color: rgb(9, 2, 19);
+    color:rgb(246, 19, 212);
+  }
+  
+  .toggle-button {
+  width: 50px;
+  height: 30px;
+  border-radius: px;
+  margin: 0 5px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: rgb(94, 94, 94); /* Initial color: Red (off) */
+}
+
+.toggle-button.active {
+  background-color: rgb(2, 83, 2); /* Color when on */
+}
+
+.toggle-button::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 0%;
+  transition: transform 0.3s ease;
+}
+
+.toggle-button.active::before {
+  transform: translateX(20px);
+}
