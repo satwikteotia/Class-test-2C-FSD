@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body{
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: blueviolet;
+        }
+        button{
+            border-radius: 5px;
+            height: 25px;
+            width: 90px;
+            /* color: #3cf485; */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="maincontainer">
+        <button onclick="onstart()" id="Start">Start</button>
+    </div>
+</body>
+<script>
+    let heading = document.createElement("h2")
+    let input = document.createElement("input")
+    let btn = document.createElement("button")
+    let Start = document.createElement("button")
+    Start.id = "Start"
+    Start.innerText = "Start"
+    Start.onclick = onstart
+
+    btn.id = "secondbtn"
+
+    heading.innerHTML = "Custom Lighting"
+    btn.innerText = "Done"
+    btn.style.backgroundColor="#3cf485"
+    
+
+    let div = document.createElement("div")
+
+    div.appendChild(heading)
+    div.appendChild(input)
+    div.appendChild(btn)
+
+    div.style.backgroundColor = "white"
+    div.style.height = "250px"
+    div.style.width = "500px"
+    div.style.borderRadius = "20px"
+    div.style.display = "flex"
+    div.style.flexDirection = "column"
+    div.style.gap = "10px"
+    div.style.justifyContent = "center"
+    div.style.alignItems = "center"
+    div.style.position = "relative"
+
+    // input.style.width = "80%"
+    btn.style.position = "absolute"
+    btn.style.right = "10%"
+    btn.style.bottom = "10%"
+    btn.style.height = "40px"
+    btn.style.width = "100px"
+    btn.style.borderRadius = "30px"
+
+    heading.style.position = "absolute"
+
+    heading.style.top = "10%"
+    heading.style.left = "10%"
+    // heading.style.bottom = "10%"
+    
+    input.style.position = "absolute"
+    input.style.left = "10%"
+    
+
+    let main = document.getElementById("maincontainer")
+
+    function onstart() {
+        main.innerHTML = ''
+        main.appendChild(div)
+    }
+
+    btn.addEventListener("click", function() {
+        let inputValue = input.value
+        let bulbCount = parseInt(inputValue)
+        if (isNaN(bulbCount) || bulbCount <= 0) {
+            alert("Please enter a valid number of bulbs")
+            return
+        }
+
+        main.removeChild(div)
+
+        let bulbContainerWrapper = document.createElement("div")
+        bulbContainerWrapper.style.backgroundColor = "white"
+        bulbContainerWrapper.style.padding = "20px"
+        bulbContainerWrapper.style.borderRadius = "20px"
+        bulbContainerWrapper.style.display = "flex"
+        bulbContainerWrapper.style.flexDirection = "column"
+        bulbContainerWrapper.style.gap = "10px"
+        bulbContainerWrapper.style.alignItems = "center"
+
+        let bulbContainer = document.createElement("div")
+        bulbContainer.style.display = "flex"
+        bulbContainer.style.flexWrap = "wrap"
+        bulbContainer.style.gap = "10px"
+        bulbContainer.style.justifyContent = "center"
+
+        for (let i = 0; i < bulbCount; i++) {
+            let bulbDiv = document.createElement("div")
+            bulbDiv.style.display = "flex"
+            bulbDiv.style.flexDirection = "column"
+            bulbDiv.style.alignItems = "center"
+            bulbDiv.style.gap = "10px"
+
+            let bulbImg = document.createElement("img")
+            bulbImg.src = "off_bulb.png" 
+            bulbImg.alt = "Bulb"
+            bulbImg.style.width = "100px"
+            bulbImg.style.height = "150px"
+
+            let bulbSwitch = document.createElement("label")
+            bulbSwitch.classList.add("switch")
+            
+
+            let checkbox = document.createElement("input")
+            checkbox.type = "checkbox"
+            checkbox.addEventListener("change", function() {
+                if (checkbox.checked) {
+                    bulbImg.src = "on_bulb.png"
+                } else {
+                    bulbImg.src = "off_bulb.png" 
+                }
+            })
+
+            let slider = document.createElement("span")
+            slider.classList.add("slider")
+
+            bulbSwitch.appendChild(checkbox)
+            bulbSwitch.appendChild(slider)
+
+            bulbDiv.appendChild(bulbImg)
+            bulbDiv.appendChild(bulbSwitch)
+            bulbContainer.appendChild(bulbDiv)
+        }
+
+        bulbContainerWrapper.appendChild(bulbContainer)
+        main.appendChild(bulbContainerWrapper)
+
+        let resetBtn = document.createElement("button")
+        resetBtn.innerText = "Reset"
+        resetBtn.style.marginTop = "20px"
+        resetBtn.addEventListener("click", function() {
+            main.innerHTML = ''
+            main.appendChild(Start)
+        })
+
+        main.appendChild(resetBtn)
+    })
+</script>
+
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: red; 
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: green; 
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+</style>
+</html>
