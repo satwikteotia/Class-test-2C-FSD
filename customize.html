@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Lighting</title>
+    <style>
+        body {
+            background-color: blueviolet; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal {
+            background-color: white;
+            width: 300px;
+            height: 150px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .modal h2 {
+            font-size: 30px;
+            color: blueviolet; 
+            margin: 0;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .modal input {
+            background-color: rgb(203, 195, 195);
+            font-size: 16px;
+            padding: 8px;
+            width: calc(50% - 40px);
+            text-align: center;
+            margin: 0;
+            border: 1px solid #9b9696;
+            border-radius: 5px;
+            position: absolute;
+            top: 70px;
+            left: 20px;
+        }
+        .modal button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745; 
+            color: white;
+            border: none;
+            border-radius: 50px; 
+            transition: background-color 0.3s ease;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        .modal button:hover {
+            background-color: #218838; 
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <h2>Custom Lighting</h2>
+        <form action="lights.html" method="get">
+            <input type="number" name="count" min="1" max="4" placeholder="4" required>
+            <br>
+            <button type="submit">Done</button>
+        </form>
+    </div>
+</body>
+</html> 

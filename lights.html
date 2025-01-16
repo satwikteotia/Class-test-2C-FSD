@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lighting Display</title>
+    <style>
+        body {
+            background-color: blueviolet;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .lights {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .light-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .light-bulb {
+            width: 100px; 
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        .toggle-btn {
+            width: 50px;
+            height: 25px;
+            background-color: red;
+            border: none;
+            border-radius: 12.5px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-btn::before {
+            content: "";
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+        .toggle-btn.on {
+            background-color: green;
+        }
+        .toggle-btn.on::before {
+            transform: translateX(25px);
+        }
+        .reset-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #6c757d;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            position: relative; 
+        }
+        .reset-btn:hover {
+            background-color: #565e64;
+        }
+    </style>
+    <script>
+        function getQueryParameter(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function createLights() {
+            const count = parseInt(getQueryParameter("count"), 10) || 4; 
+            const lightsContainer = document.querySelector(".lights");
+            lightsContainer.innerHTML = ""; 
+
+            for (let i = 1; i <= count; i++) {
+                const lightItem = document.createElement("div");
+                lightItem.className = "light-item";
+
+                const bulb = document.createElement("img");
+                bulb.id = `bulb${i}`;
+                bulb.className = "light-bulb";
+                bulb.src = "off.png";
+                bulb.alt = `Light Bulb ${i}`;
+
+                const button = document.createElement("button");
+                button.className = "toggle-btn";
+                button.onclick = () => toggleLight(button, `bulb${i}`);
+
+                lightItem.appendChild(bulb);
+                lightItem.appendChild(button);
+                lightsContainer.appendChild(lightItem);
+            }
+        }
+
+        function toggleLight(button, bulbId) {
+            const bulb = document.getElementById(bulbId);
+            button.classList.toggle("on"); 
+            if (button.classList.contains("on")) {
+                bulb.src = "yellow.png"; 
+            } else {
+                bulb.src = "off.png"; 
+            }
+        }
+
+        function resetLights() {
+            
+            window.location.href = "start.html";
+        }
+
+    
+        window.onload = createLights;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="lights">
+           
+        </div>
+    </div>
+    <button class="reset-btn" onclick="resetLights()">Reset</button>
+</body>
+</html>
